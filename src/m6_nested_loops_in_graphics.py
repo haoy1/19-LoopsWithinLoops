@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Brandon Hao.
+"""  # TOO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,9 +80,32 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # TOO: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    x = circle.center.x
+    y = circle.center.y
+
+    for k in range(r):
+        for i in range(3):
+            circle_0 = rg.Circle(rg.Point(x, y), circle.radius)
+            circle_0.fill_color = circle.fill_color
+            circle_0.attach_to(window)
+            x = x + 2*circle.radius
+            window.render(0.1)
+
+        x = circle.center.x
+        y = y + 2*circle.radius
+
+    for k in range(3):
+        for i in range(c + 3):
+            circle_0 = rg.Circle(rg.Point(x, y), circle.radius)
+            circle_0.fill_color = circle.fill_color
+            circle_0.attach_to(window)
+            window.render(0.1)
+            x = x + 2 * circle.radius
+        x = circle.center.x
+        y = y + 2 * circle.radius
 
 
 def run_test_draw_wall_on_right():
@@ -124,6 +147,29 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    x_1 = rectangle._upper_left_corner.x
+    x_2 = rectangle._lower_right_corner.x
+    y_1 = rectangle._upper_left_corner.y
+    y_2 = rectangle._lower_right_corner.y
+
+    length = x_2 - x_1
+    height = y_1 - y_2
+
+    for k in range(n):
+        for i in range(k + 1):
+            rectangle_0 = rg.Rectangle(rg.Point(x_1, y_1), rg.Point(x_2, y_2))
+            rectangle_0.fill_color = rectangle.fill_color
+            rectangle_0.attach_to(window)
+            x_1 = x_1 - length
+            x_2 = x_2 - length
+
+            window.render(0.1)
+
+        y_1 = y_1 - height
+        y_2 = y_2 - height
+
+        x_1 = rectangle._upper_left_corner.x
+        x_2 = rectangle._lower_right_corner.x
 
 
 # ----------------------------------------------------------------------
